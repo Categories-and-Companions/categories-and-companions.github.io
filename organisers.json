@@ -1,0 +1,10 @@
+ [
+    {"first_name" : "Jack", "last_name" : "Crawford",  "affiliation" : "Australian National University"},
+    {"first_name" : "Matthew", "last_name" : "Di Meglio",  "affiliation" : "University of Edinburgh"},
+    {"first_name" : "Nicola", "last_name" : "Di Vittorio",  "affiliation" : "Macquarie University"},
+    {"first_name" : "David", "last_name" : "Farrell",  "affiliation" : "Macquarie University"},
+    {"first_name" : "Eli", "last_name" : "Hazel",  "affiliation" : "Macquarie University"},
+    {"first_name" : "Yao", "last_name" : "Tang",  "affiliation" : "Macquarie University"},
+    {"first_name" : "Ivo", "last_name" : "Vekemans",  "affiliation" : "Australian National University"},
+    {"first_name" : "Paula", "last_name" : "Verdugo",  "affiliation" : "Macquarie University"}
+]
