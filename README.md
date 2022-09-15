@@ -32,3 +32,18 @@ and may include latex inline math formulae enclosed in \( and \).
 It may also include mathjax in \(\)
 
 The special JSON characters " and \ must be escaped after the fact
+
+```
+{
+        "name": "Guglielmo Nocera",
+        "affiliation": "Université Paris 13",
+        "invited": false,
+        "day": "22",
+        "start": "1899-12-30T22:31:36.000Z",
+        "end": "1899-12-30T23:01:36.000Z",
+        "startlong": "September 22, 2022 21:30 GMT+10",
+        "endlong": "September 22, 2022 22:00 GMT+10",
+        "start_ISO8601": "2022-09-22T11:30:00.000Z",
+        "end_ISO8601": "2022-09-22T12:00:00.000Z"
+    },
+```

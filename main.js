@@ -8,26 +8,26 @@ function strcmp(a, b) {
     }
 }
 
-function cmpMaybe(maybeA, maybeB, cmp) {
-    if (maybeA.case === "Nothing" &&
-        maybeB.case === "Nothing") {
-        return 0;
-    } else if (
-        maybeA.case === "Just" &&
-        maybeB.case === "Nothing") {
-        return -1;
-    } else if (
-        maybeA.case === "Nothing" &&
-        maybeB.case === "Just") {
-        return 1;
-    } else if (
-        maybeA.case === "Just" &&
-        maybeB.case === "Just") {
-        return cmp(maybeA.value, maybeB.value);
-    } else {
-        throw `Called cmpMaybe on invalid value ${maybeA} or ${maybeB}`;
-    }
-}
+// function cmpMaybe(maybeA, maybeB, cmp) {
+//     if (maybeA.case === "Nothing" &&
+//         maybeB.case === "Nothing") {
+//         return 0;
+//     } else if (
+//         maybeA.case === "Just" &&
+//         maybeB.case === "Nothing") {
+//         return -1;
+//     } else if (
+//         maybeA.case === "Nothing" &&
+//         maybeB.case === "Just") {
+//         return 1;
+//     } else if (
+//         maybeA.case === "Just" &&
+//         maybeB.case === "Just") {
+//         return cmp(maybeA.value, maybeB.value);
+//     } else {
+//         throw `Called cmpMaybe on invalid value ${maybeA} or ${maybeB}`;
+//     }
+// }
 
 
 // Grouping into day numbers is hacky.
@@ -36,6 +36,8 @@ function cmpMaybe(maybeA, maybeB, cmp) {
 async function fetchAllAbstracts() {
     const response = await fetch('abstracts.json');
     const sessions = await response.json();
+
+    console.log("Sessions", sessions);
 
     // Used to work out local timezone
     // Under the assumption that the
@@ -50,32 +52,35 @@ async function fetchAllAbstracts() {
     // means no date provided.
     const sessionGroups = new Map();
     for (const session of sessions) {
-        const dayNumber = caseMaybe(session.talk.time,
-            () => 7,
-            (time) => {
-                date = new Date(time.start_ISO8601);
-                sampleDate = date;
-                return date.getDay();
-            });
-        
-        if (!sessionGroups.has(dayNumber)) {
-            sessionGroups.set(dayNumber, new Array());
-        }
+        var dayNumber = 7;
 
-        const groupSessions = sessionGroups.get(dayNumber);
-        groupSessions.push(session);
+        date = new Date(session.start_ISO8601);
+        if (isFinite(date)) {
+            sampleDate = date;
+            dayNumber = date.getDay();
+
+            if (!sessionGroups.has(dayNumber)) {
+                sessionGroups.set(dayNumber, new Array());
+            }
+    
+            const groupSessions = sessionGroups.get(dayNumber);
+            groupSessions.push(session);
+        } 
     }
 
     const abstractCardContainer = document.getElementById('abstract-cards');
 
     const explanation = document.createElement('p');
 
+    
 
     const offset = -1 * sampleDate.getTimezoneOffset();
     const offsetSign = Math.sign(offset);
     const offsetTotalMinutes = offsetSign * offset;
     const offsetMinutes = offsetTotalMinutes % 60;
     const offsetHours = (offsetTotalMinutes - offsetMinutes) / 60;
+
+    console.log("Sample date", sampleDate, "Offset", offset);
 
     const offsetString
         = ((offsetSign > 0) ? '+' : '-')
@@ -88,7 +93,7 @@ async function fetchAllAbstracts() {
     abstractCardContainer.appendChild(explanation);
 
     const dayNumbers = Array.from(sessionGroups.keys()).sort();
-    for (const dayNumber of [1, 2, 3, 4, 5, 6, 0, 7]) {
+    for (const dayNumber of [0, 1, 2, 3, 4, 5, 6, 7]) {
         if (!sessionGroups.has(dayNumber)) {
             continue;
         }
@@ -96,22 +101,10 @@ async function fetchAllAbstracts() {
         const sessions = sessionGroups
             .get(dayNumber)
             .sort((a, b) => {
-                let result = cmpMaybe(a.talk.time, b.talk.time, (x, y) => {
-                    return strcmp(x.start_ISO8601, y.start_ISO8601);
-                });
-                if (result !== 0) return result;
-
-                if (a.presenter === undefined) return 1;
-                if (b.presenter === undefined) return -1;
-        
-                result = strcmp(a.presenter.last_name, b.presenter.last_name);
-                if (result !== 0) return result;
-        
-                return strcmp(a.presenter.first_name, b.presenter.first_name);
-                
+                return strcmp(a.start_ISO8601, b.start_ISO8601);
             });
 
-        const groupNames = ['Sunday, June 13', 'Monday, June 7', 'Tuesday, June 8', 'Wednesday, June 9', 'Thursday, June 10', 'Friday, June 11', 'Saturday, June 12', 'Unscheduled'];
+        const groupNames = ['Sunday, September 18', 'Monday, September 19', 'Tuesday, September 20', 'Wednesday, September 21', 'Thursday, September 22', 'Friday, September 21', 'Saturday, September 24', 'Unscheduled'];
 
         const heading = document.createElement('h3');
         heading.textContent = groupNames[dayNumber];
@@ -132,18 +125,18 @@ async function fetchAllAbstracts() {
 }
 
 
-function caseMaybe(maybeVal, onNothing, onJust) {
-    if (maybeVal.case === "Nothing") {
-        return onNothing();
-    } else if (maybeVal.case === "Just") {
-        return onJust(maybeVal.value);
-    } else {
-        throw `Called caseMaybe on invalid value ${maybeVal}`;
-    }
-}
+// function caseMaybe(maybeVal, onNothing, onJust) {
+//     if (maybeVal.case === "Nothing") {
+//         return onNothing();
+//     } else if (maybeVal.case === "Just") {
+//         return onJust(maybeVal.value);
+//     } else {
+//         throw `Called caseMaybe on invalid value ${maybeVal}`;
+//     }
+// }
 
 
-function formatDate(maybeTime) {
+function formatDate(time) {
     // See https://tc39.es/ecma402/#datetimeformat-objects
     const dateTimeFormat = new Intl.DateTimeFormat(
         'en-au', //default
@@ -152,17 +145,11 @@ function formatDate(maybeTime) {
         }
     );
 
-    return caseMaybe(maybeTime,
-        () => {
-            return "To be scheduled";
-        },
-        (time) => {
-            return dateTimeFormat
-                .format(new Date(time.start_ISO8601));
-        });
+    return dateTimeFormat
+        .format(new Date(time));
 }
 
-function formatTime(maybeTime) {
+function formatTime(time) {
     // See https://tc39.es/ecma402/#datetimeformat-objects
     const dateTimeFormat = new Intl.DateTimeFormat(
         'default',
@@ -173,14 +160,8 @@ function formatTime(maybeTime) {
         }
     );
 
-    return caseMaybe(maybeTime,
-        () => {
-            return "TBA";
-        },
-        (time) => {
-            return dateTimeFormat
-                .format(new Date(time.start_ISO8601));
-        });
+    return dateTimeFormat
+        .format(new Date(time));
 }
 
 
@@ -198,13 +179,9 @@ function createAbstractCard(abstract) {
 
     const button = document.createElement('div');
     const activity_type_class =
-        (abstract.presenter === undefined)
-        ? ((abstract.talk.abstract === undefined)
-            ? 'break'
-            : 'activity')
-        : ((abstract.presenter.invited)
+        (abstract.invited)
             ? 'invited-speaker'
-            : 'speaker');
+            : 'speaker';
         
     button.setAttribute('class', `accordion-button collapsed ${activity_type_class}`);
     button.setAttribute('data-bs-toggle', 'collapse');
@@ -221,7 +198,7 @@ function createAbstractCard(abstract) {
 
     const time_col = document.createElement('div');
     time_col.setAttribute('class', 'col-2 col-lg-1 h6 text-center');
-    time_col.textContent = formatTime(abstract.talk.time);
+    time_col.textContent = formatTime(abstract.start_ISO8601);
     outer_row.appendChild(time_col);
 
     const info_col = document.createElement('div');
@@ -234,47 +211,40 @@ function createAbstractCard(abstract) {
 
     const title_col = document.createElement('div');
     title_col.setAttribute('class', 'col h5');
-    title_col.textContent = abstract.talk.title;
+    title_col.textContent = (abstract.title !== undefined) ? abstract.title : "Title TBA";
     title_row.appendChild(title_col);
 
-    if (abstract.presenter !== undefined) {
-        const speaker_row = document.createElement('div');
-        speaker_row.setAttribute('class', 'row');
-        info_col.appendChild(speaker_row);
+    const speaker_row = document.createElement('div');
+    speaker_row.setAttribute('class', 'row');
+    info_col.appendChild(speaker_row);
 
-        const speaker_col = document.createElement('div');
-        speaker_col.setAttribute('class', 'col h5 text-muted small');
-        speaker_col.textContent = `${abstract.presenter.first_name} ${abstract.presenter.last_name} \u2022 ${abstract.presenter.affiliation}`;
-        speaker_row.appendChild(speaker_col);
-    }
+    const speaker_col = document.createElement('div');
+    speaker_col.setAttribute('class', 'col h5 text-muted small');
+    speaker_col.textContent = `${abstract.name} \u2022 ${abstract.affiliation}`;
+    speaker_row.appendChild(speaker_col);
 
-    if ((abstract.presenter === undefined && abstract.talk.abstract !== undefined) || (abstract.presenter !== undefined && abstract.presenter.invited)) {
+    if (abstract.invited) {
         const invited_row = document.createElement('div');
         invited_row.setAttribute('class', 'row');
         info_col.appendChild(invited_row);
 
         const invited_col = document.createElement('div');
         invited_col.setAttribute('class', 'col h5 text-muted small');
-        invited_col.textContent = 
-            (abstract.presenter === undefined) ?
-            'Activity' :
-            'Invited speaker';
+        invited_col.textContent = 'Invited speaker';
         invited_row.appendChild(invited_col);
     }
     
 
     // CARD BODY
-    if (abstract.talk.abstract !== undefined) {
-        const collapse = document.createElement('div');
-        collapse.setAttribute('class', 'accordion-collapse collapse');
-        collapse.setAttribute('id', id);
-        item.appendChild(collapse);
+    const collapse = document.createElement('div');
+    collapse.setAttribute('class', 'accordion-collapse collapse');
+    collapse.setAttribute('id', id);
+    item.appendChild(collapse);
 
-        const body = document.createElement('div');
-        body.setAttribute('class', 'accordion-body');
-        body.innerHTML = abstract.talk.abstract;
-        collapse.appendChild(body);
-    }
+    const body = document.createElement('div');
+    body.setAttribute('class', 'accordion-body');
+    body.innerHTML = (abstract.abstract !== undefined) ? abstract.abstract : "Abstract TBA";
+    collapse.appendChild(body);
 
     return item;
 }
@@ -326,7 +296,7 @@ function generateId(len) {
 }
 
 async function main() {
-    // await fetchAllAbstracts();
+    await fetchAllAbstracts();
     await fetchAllOrganisers();
     await MathJax.typesetPromise();
 }
