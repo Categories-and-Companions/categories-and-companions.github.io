@@ -104,7 +104,7 @@ async function fetchAllAbstracts() {
                 return strcmp(a.start_ISO8601, b.start_ISO8601);
             });
 
-        const groupNames = ['Sunday, September 18', 'Monday, September 19', 'Tuesday, September 20', 'Wednesday, September 21', 'Thursday, September 22', 'Friday, September 21', 'Saturday, September 24', 'Unscheduled'];
+        const groupNames = ['Sunday, September 18', 'Monday, September 19', 'Tuesday, September 20', 'Wednesday, September 21', 'Thursday, September 22', 'Friday, September 23', 'Saturday, September 24', 'Unscheduled'];
 
         const heading = document.createElement('h3');
         heading.textContent = groupNames[dayNumber];
