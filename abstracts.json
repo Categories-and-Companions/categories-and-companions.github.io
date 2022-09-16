@@ -368,13 +368,8 @@
         "title": "A categorical proof of the Carathéodory extension theorem",
         "abstract": "<p>The Carathéodory extensions theorem is a fundamental result in measure theory as it is\nneeded for the existence of measures we want to work with. A problem that often occurs\nin measure theory is that we don’t know what a general measurable subset looks like.\nThe Carathéodory extension theorem says that to define a measure we don’t have to say\nsomething about every measurable subset, but only a generating Boolean algebra.</p>\n<p>To prove this result categorically, we represent (pre)measures and outer measures by\ncertain co/lax and strict transformations. The carathéodory extension then corresponds to\na Kan extension of strict transformations. We develop a general framework for extensions\nof transformations between poset-valued functors and give several results on the existence\nand construction of extensions of these transformations. We proceed by showing that transformations and functors corresponding to measures satisfy these results, which proves the Carathéodory extension theorem.</p>",
         "invited": false,
-        "day": "22",
-        "start": "1899-12-30T23:01:36.000Z",
-        "end": "1899-12-30T23:31:36.000Z",
-        "startlong": "September 22, 2022 22:00 GMT+10",
-        "endlong": "September 22, 2022 22:30 GMT+10",
-        "start_ISO8601": "2022-09-22T12:00:00.000Z",
-        "end_ISO8601": "2022-09-22T12:30:00.000Z"
+        "start_ISO8601": "2022-09-22T11:30:00.000Z",
+        "end_ISO8601": "2022-09-22T12:00:00.000Z"
     },
     {
         "name": "Guglielmo Nocera",
