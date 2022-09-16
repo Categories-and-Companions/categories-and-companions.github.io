@@ -2,6 +2,8 @@
     {
         "name": "Dominic Verity",
         "affiliation": "Macquarie University and Australian National University",
+        "title" : "Themes and motivations in \\(\\infty\\)-cosmology",
+        "abstract": "<p>In this talk, we review the current state of the art in <i>model agnostic</i> \\(\\infty\\)-category theory, which seeks to provide a unified account of \\(\\infty\\)-category theory freed from the straight jacket of a specific model.</p><p>In particular, we shall focus on the theory of <i>\\(\\infty\\)-cosmoi</i>, a general framework for the development of <i>fibrational \\(\\infty\\)-category theories</i>. The key novelty of this approach is that it allows both for the model independent, <i>synthetic</i> development of \\(\\infty\\)-categorical results and for the transport of <i>analytically</i> derived such results from one model to another.</p><p>This talk, however, is not intended to provide a thorough going mathematical introduction to \\(\\infty\\)-cosmology, largely because Emily Riehl and I have written a long and detailed graduate text <a href='https://elements-book.github.io'>Elements of \\(\\infty\\)-Category Theory</a> for that purpose. Instead, I would like to dwell on some underlying <i>\"philosophical\"</i> themes and motivations that have shaped the development of \\(\\infty\\)-cosmology. Some of these, including the key application of traditional, Australian-style <i>2-category theory</i>, started as experiments in the application of somewhat unlikely, low dimensional, methods to the expression of the category theory of \\(\\infty\\)-categories. Indeed, to our own great surprise, these have proved to be <i>unreasonably effective</i> tools which now form the cornerstone of the development discussed in The Elements.</p><p>My hope is to encourage symposium participants to embrace experimentation with unlikely ideas during their time at MATRIX. In many cases, of course, these will remain only mirages of useful mathematics, but in an important minority they will lead to powerful new insights and inspirations.</p>",
         "invited": true,
         "day": 19,
         "start": "1899-12-30T09:31:36.000Z",
@@ -43,7 +45,7 @@
         "name": "Marco Volpe",
         "affiliation": "University of Regensburg",
         "title": "Six operations in topology",
-        "abstract": "<p>\nTBA\n</p>",
+        "abstract": "<p>In topology, the six functor formalism consists of a collection of functorial operations defined on derived categories of sheaves of abelian groups. Through these functors and their relations one may recover the main features of singular cohomology, including Poincaré duality. In this talk we will explain which categorical properties of the \\(\\infty\\)-category  of sheaves of spectra on a locally compact Hausdorff space allow one to construct such formalism in the more general setting of sheaves of stable and bicomplete \\(\\infty\\)-categories.</p>",
         "invited": false,
         "day": "19",
         "start": "1899-12-30T21:01:36.000Z",
@@ -111,7 +113,9 @@
     },
     {
         "name": "Patrick Elliot",
-        "affiliation": "Affiliation TBA",
+        "affiliation": "University of Melbourne",
+        "title" : "The nerve and homotopy coherent nerve constructions for cyclic operads",
+        "abstract" : "<p>Coloured Cyclic operads are an important and natural generalisation of coloured operads in which operations have no preferred input and output. Examples arise naturally in low dimensional topology and for algebraic structures with pairings. Hackney, Robertson, and Yau recently laid the groundwork for a theory of up-to-homotopy cyclic operads, building on the dendroidal approach to infinity operads of Cisinski, Moerdijk, and Weiss. In this talk we will present work in progress on the homotopy theory of higher cyclic operads in which the colour set is equipped with an involution, including a cyclic dendoridal nerve theorem and the construction of a homotopy coherent cyclic dendroidal nerve.</p>",
         "day": 20,
         "start": "1899-12-30T09:31:36.000Z",
         "end": "1899-12-30T10:01:36.000Z",
@@ -347,7 +351,8 @@
     {
         "name": "Jaco Ruit",
         "affiliation": "Utrecht University",
-        "title": "\\(\\infty\\)-Equipments: higher categorical proarrow equipments",
+        "title": "Higher proarrow equipments",
+        "abstract": "<p>Classically, 2-categories may be equipped with so-called proarrow equipments. These equipments are precisely those double categories so that each vertical arrow admits a companion and conjoint. When a 2-category is endowed with such a structure, one may do formal category theory in the 2-category. In this talk, we will discuss a generalization of equipments to the \\(\\infty\\)-categorical world. These \\(\\infty\\)-equipments will again yield a formal category theory in their associated \\((\\infty,2)\\)-categories. We will see some examples and basic closure properties of these \\(\\infty\\)-equipments, and also briefly discuss the free companion and free conjoint if time permits. Furthermore, we hope to touch on a motivation for studying these \\(\\infty\\)-equipments: namely, they can be used to construct equivariant and parametrized \\(\\infty\\)-category theory.</p>",
         "invited": false,
         "day": "22",
         "start": "1899-12-30T21:31:36.000Z",
@@ -374,6 +379,8 @@
     {
         "name": "Guglielmo Nocera",
         "affiliation": "Université Paris 13",
+        "title": "The Exodromy Theorem",
+        "abstract": "<p>Let \\(X\\) be a connected topological space. By a classical theorem in algebraic topology, the category of locally constant sheaves on \\(X\\) with values in Set is equivalent to the category of representations of \\(\\pi_1(X)\\). In particular, our category is of the form \\(\\operatorname{Fun}(\\mathcal{A}(X),\\mathcal{B})\\), where \\(\\mathcal{B}\\) is a category which does not depend on \\(X\\) and is presentable. This presentation has interesting abstract categorical consequences (for example, the category of locally constant sheaves is itself presentable). This kind of presentation can be extended to other categories of sheaves, e.g. the category of constructible sheaves on a stratified space. This latter statement is due to Robert Macpherson and has been generalized to the setting of derived categories by Jacob Lurie. We explain the statement of the theorem and mention an application to our research.</p><p><b>Prerequisites:</b> Basic algebraic topology (homotopy groups), basic category theory (presentable categories, symmetric monoidal categories). Lurie’s theorem will only be mentioned briefly at the end, and will be accessible to those with basic knowledge in higher category theory and homological algebra.</p>",
         "invited": false,
         "start_ISO8601": "2022-09-22T22:00:00.000Z",
         "end_ISO8601": "2022-09-22T22:30:00.000Z"
@@ -418,6 +425,8 @@
     {
         "name": "Dirk Hofmann",
         "affiliation": "Universidade de Aveiro",
+        "title": "Topology through the eyes of enriched categories",
+        "abstract" : "Employing a formal analogy between order sets (respectively categories) and topological (and other kinds of) spaces, over the past decades we have investigated the meaning of various categorical constructions in topology. Within this setting, our study of spaces is primary based on concepts and results like distributor, colimit, adjunction, dual space and the Yoneda lemma; however, we stress that this path leads us naturally to more traditional topics such as compact, locally compact and stably compact spaces, to the filter space and the Vietories construction, and to sober spaces and continuous lattices. In particular, we explain the relation ship between soberness and Cauchy completeness, the presheaf monads and the filter respectively Vietoris space, cocomplete categories and continuous lattice, distributivity and disconnectedness, and how the statement \"\\(X\\) is totally cocomplete iff \\(X^\\mathrm{op}\\) is totally complete\" specialises to O. Wylers characterisation of the algebras of the Vietoris monad on compact Hausdorff spaces.",
         "invited": true,
         "start_ISO8601": "2022-09-23T10:00:00.000Z",
         "end_ISO8601": "2022-09-23T11:00:00.000Z"
